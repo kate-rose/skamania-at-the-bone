@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A visual briefing for the 17th Legislative District on Skamania County's 2027 budget gap, why it is structural, and the state levers that could help.">
+<meta property="og:title" content="Skamania at the Bone">
+<meta property="og:description" content="Skamania County's 2027 budget gap, why it is structural, and the state levers that could help. Prepared by the Skamania Dispatch.">
+<title>Skamania at the Bone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: one reading column (~68ch) for prose, charts and card grids widen to 940px; Gorge Civic Projector Kit palette adapted from slides to a scrolling briefing. */
+:root{
+  --bg:#EEF1EC; --panel:#DDE4DD; --ink:#132A31; --muted:#4E6268;
+  --lead:#C46A12; --bar:#6F8F86; --bar2:#3E615A; --track:#C9D3CC; --rule:#B9C6BE;
+  --chip-typed:#132A31; --chip-tape:#7A4A12;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --serif:"Source Serif 4",Georgia,serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#122A33; --panel:#1B3843; --ink:#EAF0EE; --muted:#9DB3B3;
+    --lead:#F2B14C; --bar:#6E978C; --bar2:#A9C9BF; --track:#244652; --rule:#2E5260;
+    --chip-typed:#EAF0EE; --chip-tape:#F2B14C; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#122A33; --panel:#1B3843; --ink:#EAF0EE; --muted:#9DB3B3;
+  --lead:#F2B14C; --bar:#6E978C; --bar2:#A9C9BF; --track:#244652; --rule:#2E5260;
+  --chip-typed:#EAF0EE; --chip-tape:#F2B14C; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:940px;margin:0 auto}
+.col{max-width:680px}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.95;text-wrap:balance;margin:0}
+h1{font-size:clamp(56px,11vw,112px);letter-spacing:-.5px}
+h2{font-size:clamp(36px,6vw,56px);margin-top:8px}
+h3{font-size:28px;font-weight:700;line-height:1.05}
+p{margin:0}
+.stack>*+*{margin-top:16px}
+a{color:inherit;text-decoration-color:var(--lead);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--lead);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+
+/* masthead */
+.mast{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;border-bottom:1px solid var(--rule);padding-block:20px 12px;
+  font-family:var(--serif);font-size:15px;color:var(--muted)}
+.mast b{color:var(--ink);font-weight:600}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px 56px;padding-block:40px 32px;align-items:end}
+.hero .for{font-size:20px;color:var(--muted);margin-top:16px;max-width:30ch}
+.stat{font-family:var(--display);font-weight:700;font-size:clamp(96px,17vw,200px);line-height:.85;color:var(--lead);font-variant-numeric:tabular-nums}
+.stat-cap{font-size:20px;margin-top:12px;max-width:38ch}
+@media (max-width:760px){.hero{grid-template-columns:minmax(0,1fr)}}
+
+/* chips */
+.chip{display:inline-block;font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.4px;padding:1px 7px;border-radius:2px;border:1px solid currentColor;vertical-align:2px;white-space:nowrap}
+.chip.typed{color:var(--chip-typed)}
+.chip.tape{color:var(--chip-tape);border-style:dashed}
+.chip.model{color:var(--muted);border-style:dotted}
+
+/* minute summary */
+.minute{background:var(--panel);padding:24px 28px;margin-block:8px 0}
+.minute h3{margin-bottom:12px}
+.minute ol{margin:0;padding-left:22px}
+.minute li+li{margin-top:10px}
+
+/* sections */
+section{padding-top:64px}
+.eyebrow{font-family:var(--display);font-weight:600;font-size:18px;color:var(--muted);letter-spacing:.6px}
+.lede{font-size:20px;margin-top:16px}
+
+/* figures */
+figure{margin:32px 0 0}
+figure .fig-title{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.05}
+figure .fig-sub{color:var(--muted);font-size:16px;margin-top:4px;max-width:68ch}
+.chart{margin-top:12px;width:100%;min-height:120px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+figcaption{font-size:14px;color:var(--muted);border-top:1px solid var(--rule);padding-top:8px;margin-top:10px;max-width:80ch}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--display);font-weight:600;font-size:16px;margin-top:10px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border-radius:2px;display:inline-block}
+.sw.line{height:3px;width:20px}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 40px}
+@media (max-width:760px){.two{grid-template-columns:minmax(0,1fr)}}
+
+/* svg text */
+.ax{font-family:var(--display);font-size:14px;fill:var(--muted)}
+.lab{font-family:var(--display);font-size:15px;font-weight:600;fill:var(--ink)}
+.lab-lead{font-family:var(--display);font-size:16px;font-weight:700;fill:var(--lead)}
+.grid{stroke:var(--rule);stroke-width:1}
+
+/* bites */
+.bite{border-top:3px solid var(--ink);padding-top:14px;margin-top:40px;max-width:760px}
+.bite q{display:block;font-family:var(--display);font-weight:700;font-size:clamp(28px,4.4vw,42px);line-height:1.05;quotes:"\201C" "\201D"}
+.bite .plain{font-family:var(--display);font-weight:700;font-size:clamp(26px,4vw,36px);line-height:1.08}
+.bite .who{font-size:16px;color:var(--muted);margin-top:10px}
+.bites-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
+.bites-grid .bite{margin-top:32px}
+.bites-grid .bite q,.bites-grid .bite .plain{font-size:clamp(24px,3.2vw,30px)}
+@media (max-width:760px){.bites-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* fair box */
+.fair{border:1px solid var(--rule);padding:22px 26px;margin-top:32px}
+.fair ul{margin:10px 0 0;padding-left:20px}
+.fair li+li{margin-top:8px}
+
+/* levers */
+.levers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:28px}
+@media (max-width:760px){.levers{grid-template-columns:minmax(0,1fr)}}
+.lever{background:var(--panel);padding:22px 24px;min-width:0}
+.lever h3{margin-bottom:10px}
+.lever dl{margin:0;font-size:16px}
+.lever dt{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.5px;color:var(--muted);margin-top:12px}
+.lever dd{margin:2px 0 0}
+.lever .cite{font-size:14px;color:var(--muted);margin-top:12px}
+
+/* tables */
+.tbl{overflow-x:auto;margin-top:24px}
+table{border-collapse:collapse;width:100%;font-size:16px;min-width:620px}
+th{font-family:var(--display);font-weight:700;font-size:16px;text-align:left;color:var(--muted);border-bottom:2px solid var(--ink);padding:8px 10px 6px 0}
+td{border-bottom:1px solid var(--rule);padding:10px 10px 10px 0;vertical-align:top}
+td:first-child{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.1;width:30%}
+.when{font-family:var(--display);font-weight:700;font-size:19px;white-space:nowrap}
+
+/* people */
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px 32px;margin-top:24px}
+.person b{font-family:var(--display);font-size:22px;font-weight:700;display:block;line-height:1.1}
+.person span{font-size:16px;color:var(--muted)}
+
+.method{font-size:15px;color:var(--muted);border-top:1px solid var(--rule);margin-top:64px;padding-top:16px}
+.method p+p{margin-top:8px}
+.print-only{display:none}
+@media (prefers-reduced-motion:no-preference){.grow{transform-origin:left;animation:grow 1.1s ease-out both}@keyframes grow{from{transform:scaleX(.001)}}}
+@page{size:letter;margin:0.55in 0.6in}
+@media print{
+  :root,:root[data-theme="dark"]{--bg:#FFFFFF;--panel:#EEF1EC;--ink:#132A31;--muted:#4E6268;--lead:#C46A12;--bar:#6F8F86;--bar2:#3E615A;--track:#DDE4DD;--rule:#B9C6BE;--chip-typed:#132A31;--chip-tape:#7A4A12;color-scheme:light}
+  body{font-size:11pt;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .grow{animation:none!important}
+  .hero{padding-block:16px 12px}
+  h1{font-size:54pt} h2{font-size:28pt} h3{font-size:16pt}
+  .stat{font-size:66pt}.stat-cap{font-size:12pt}
+  .lede{font-size:12.5pt} section{padding-top:28px}
+  .bite q{font-size:20pt}.bite .plain{font-size:18pt}.bites-grid .bite q,.bites-grid .bite .plain{font-size:15pt}
+  .bite .who,figure .fig-sub,.lever dl,table{font-size:10pt} figcaption,.method,.lever .cite{font-size:8.5pt}
+  figure,.bite,.lever,.fair,.minute,tr,.person,.legend{break-inside:avoid}
+  h2,h3,.eyebrow,.fig-title{break-after:avoid}
+  .hero{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+  .two,.levers,.bites-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .levers{gap:12px;margin-top:14px} .lever{padding:12px 14px} .lever dt{margin-top:6px;font-size:9pt} .lever dl{font-size:9pt;line-height:1.4}
+  #levers,#asks{break-before:page} #levers,#asks{padding-top:0}
+  .bites-grid .bite{margin-top:18px} .bite{margin-top:22px}
+  figure{margin-top:18px} .people{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tbl{overflow:visible} table{min-width:0}
+  a{text-decoration:none}
+  .method{margin-top:14px;padding-top:8px} .method p+p{margin-top:4px} .person span{font-size:8.5pt;line-height:1.35} .method{font-size:8pt} .people{gap:10px 16px} .screen-only{display:none} .print-only{display:inline}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="mast">
+    <span><b>The Skamania Dispatch</b> · Open Gorge Public Meetings Archive</span>
+    <span>Briefing prepared Nov. 17, 2026<span class="print-only weburl"> · kate-rose.github.io/skamania-at-the-bone</span></span>
+  </div>
+
+  <header class="hero">
+    <div>
+      <h1>Skamania at the bone</h1>
+      <p class="for">A briefing for Representatives-elect Ben Christly and Diana Perez, 17th Legislative District</p>
+    </div>
+    <div>
+      <div class="stat num" id="hero-gap">$545,000</div>
+      <p class="stat-cap">The gap still open in Skamania County's 2027 general fund when commissioners adopted the preliminary budget on Nov. 3, 2026. <span class="chip tape">Meeting recording</span></p>
+      <p class="stat-cap" style="font-size:17px;color:var(--muted)">The final budget and the 2027 property-tax levies are set at a public hearing on Dec. 15, 2026, at 5 p.m., Courthouse Room 18, Stevenson.</p>
+    </div>
+  </header>
+
+  <div class="minute col" id="one-minute">
+    <h3>The one-minute version</h3>
+    <ol>
+      <li>The county's general property tax can grow 1% a year under state law, plus what new construction and a few other things add. Its general-fund operating costs, as filed with the State Auditor, grew 5 to 6% a year over the last decade. That gap widens every year on its own.</li>
+      <li>88% of the county's land is exempt from property tax, most of it national forest. Secure Rural Schools, the federal payment that replaced the county's share of national-forest timber sales, is down 76% from its 2006 peak, before inflation.</li>
+      <li>One-time money helped hold the 2025 and 2026 budgets together, including $2.5 million of federal relief set aside for county insurance premiums. None of it is ongoing.</li>
+      <li>In October and November 2026, departments were asked to cut 8%, hiring was put on hold, and the Sheriff's Office offered to halve its overtime.</li>
+      <li>Several of the county's asks in Olympia were carried by Rep. Kevin Waters, whose House term ends in January 2027 and who also runs the Skamania County Economic Development Council. Some need a new carrier in the 2027 session. They're listed below.</li>
+    </ol>
+  </div>
+
+  <div class="bite" id="bite-911">
+    <q>It will be 2 a.m., deputies go home, and then good luck calling 911.</q>
+    <p class="who">The Sheriff's Office, arguing against deeper cuts to its own budget at the county's budget workshop, Oct. 27, 2026. <span class="chip tape">Meeting recording</span></p>
+  </div>
+
+  <!-- ============ 1. THE GAP ============ -->
+  <section id="the-hole">
+    <p class="eyebrow">1 · How deep it is</p>
+    <h2>The cushion is thinning while the gap stays open</h2>
+    <p class="lede col">The county keeps a cash cushion in its general fund for bad years. By its own reserve table, that cushion peaked at the end of 2023 and fell in each of the next two years. On Nov. 3, 2026 the board adopted a new rule: keep at least 12% of five-year average spending in reserve.</p>
+
+    <figure id="fig-cash">
+      <div class="fig-title">General fund cash at year's end, from the county's reserve table</div>
+      <div class="fig-sub">Down 21% from the 2023 peak. Measured against the new reserve rule, the cushion above the floor fell from $1.64 million to $683,435 in two years. Part of that drop comes from the 2024 spending spike raising the floor.</div>
+      <div class="chart" id="chart-cash" data-h="300"></div>
+      <div class="legend"><span><i class="sw" style="background:var(--bar)"></i>Year-end cash</span><span><i class="sw" style="background:var(--lead)"></i>2025</span><span><i class="sw line" style="background:var(--ink)"></i>New reserve floor for 2026: $2,067,073</span></div>
+      <figcaption>Resolution 2026-31 and its attached ten-year table, Skamania County Board of Commissioners packet, Nov. 3, 2026. The State Auditor reports a much larger ending balance for the same fund ($12.9 million for 2025) because its figure includes money already committed or restricted to other uses. Spending in the county's table spiked to $25.5 million in 2024; nothing on file explains it.</figcaption>
+    </figure>
+
+    <figure id="fig-gap">
+      <div class="fig-title">The 2027 gap, workshop by workshop</div>
+      <div class="fig-sub">Finance staff opened the season about $1 million short on roughly $20.9 million in general-fund spending. After a first round of department cuts the figure stood at $545,000 on Oct. 20. On the morning of Nov. 3 the Sheriff's Office offered $200,751 in cuts. That evening the board adopted the preliminary budget still showing the $545,000 gap.</div>
+      <div class="chart" id="chart-gap" data-h="190"></div>
+      <figcaption><span class="chip tape">Meeting recording</span> Figures as spoken at budget workshops on Oct. 5 and Oct. 20, 2026, and at the Nov. 3 meeting and hearing. The board has not said how much of the Sheriff's offer counts against the gap.</figcaption>
+    </figure>
+
+    <div class="bite" id="bite-foolsgold">
+      <q>The overtime, I kind of feel like it's a little bit of fool's gold.</q>
+      <p class="who">A commissioner, on the Sheriff's Office offer to halve overtime, Nov. 3, 2026. The commissioner later called the phrase "a little bit harsh." Search-and-rescue calls can't be scheduled away. On Oct. 27 the Sheriff's Office had called a 50% cut "not realistic based on just the numbers this year," adding, "I'll do it." <span class="chip tape">Meeting recording</span></p>
+    </div>
+
+    <figure id="fig-onetime">
+      <div class="fig-title">One-time money that helped hold 2025 and 2026 together</div>
+      <div class="fig-sub">Federal relief money and a back payment of federal forest funds filled holes that ongoing revenue couldn't. None of it is ongoing.</div>
+      <div class="chart" id="chart-onetime" data-h="210"></div>
+      <figcaption>Resolution 2025-23 (Oct. 14, 2025) re-obligating the county's remaining Local Assistance and Tribal Consistency Fund money; Resolution 2026-20 (July 14, 2026) distributing the Secure Rural Schools back payment to the general fund. "Insurance premiums" may include the liability risk pool as well as health coverage.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 2. WHY ============ -->
+  <section id="why">
+    <p class="eyebrow">2 · Why this isn't one bad year</p>
+    <h2>Two blades closing</h2>
+    <p class="lede col">One blade is state law: the county's regular property tax can grow 1% a year, plus what new construction and a few other things add. The other is cost: wages, insurance, fuel and state-set standards grow faster. Skamania also has very little to tax.</p>
+
+    <figure id="fig-scissors">
+      <div class="fig-title">What the general levy can raise, against what it costs to stand still</div>
+      <div class="fig-sub">Starting from the 2025 levy of $2,708,677. Even with a typical year of new construction, the levy falls $525,000 a year behind by 2035 if costs grow at a cautious 3.5%. At the county's own pace (6.15% a year from 2015 to 2024 in its State Auditor filings), the gap reaches a third of cost.</div>
+      <div class="chart" id="chart-scissors" data-h="320"></div>
+      <div class="legend"><span><i class="sw line" style="background:var(--ink)"></i>Cost at 3.5% a year</span><span><i class="sw line" style="background:var(--bar)"></i>Levy at 1% plus typical new construction</span><span><i class="sw line" style="background:var(--lead)"></i>Levy at 1% alone</span></div>
+      <figcaption><span class="chip model">Projection</span> Levy Scissors model. Levy base and new construction (median $42.5 million of new value a year, 2023–2025) from Washington Department of Revenue levy detail files; cost growth from State Auditor filings. The cost line is the 2025 levy grown at 3.5% a year, a deliberately low assumption: 37 of 39 Washington counties' general-fund costs grew faster. The levy shown is the county general levy, about 14% of the 2026 general-fund budget, and the one general-fund revenue whose yearly growth state law caps. The vertical axis starts at $2.6 million.</figcaption>
+    </figure>
+
+    <div class="two">
+      <figure id="fig-land">
+        <div class="fig-title">What there is to tax</div>
+        <div class="fig-sub">Each square is 1% of the county's 1,077,365 acres.</div>
+        <div class="chart" id="chart-land" data-h="260"></div>
+        <div class="legend" id="land-legend"></div>
+        <figcaption>Skamania County Assessor's acreage breakdown (the county's own estimate as of May 1, 2012). A reduced-value program is taxable land enrolled in a current-use program such as forest or farm.</figcaption>
+      </figure>
+
+      <figure id="fig-srs">
+        <div class="fig-title">Secure Rural Schools payments for Skamania County</div>
+        <div class="fig-sub">Title I, including the schools' half, plus Title III. Down 76% from the 2006 peak, before inflation.</div>
+        <div class="chart" id="chart-srs" data-h="260"></div>
+        <figcaption>U.S. Forest Service annual payment reports, 2001–2025, compiled in the Levy Scissors ledger. Gaps are years the reports can't be reconciled (2007, 2009) or the program lapsed (2016). State law (RCW 28A.520) sends half of Title I to school districts; the county's half can go to roads or other allowed uses, and federal law limits Title III to county projects such as wildfire and emergency services. The federal payment for untaxable federal land is a separate program (PILT), which has grown.</figcaption>
+      </figure>
+    </div>
+
+    <figure id="fig-growth">
+      <div class="fig-title">Where each year's levy growth actually came from</div>
+      <div class="fig-sub">The cap allows 1% over the highest of the last three levies, plus new construction and improvements, plus growth in state-assessed utility property. In 2025 the board left its 1% on the table and banked it; the levy still grew 1.8%.</div>
+      <div class="chart" id="chart-growth" data-h="230"></div>
+      <div class="legend"><span><i class="sw" style="background:var(--lead)"></i>1% increase</span><span><i class="sw" style="background:var(--bar)"></i>New construction and improvements</span><span><i class="sw" style="background:var(--bar2)"></i>State-assessed utility value</span><span><i class="sw" style="background:transparent;border:2px dashed var(--lead)"></i>1% available, not taken</span></div>
+      <figcaption>Department of Revenue county levy detail, tax years 2023–2025, County General levy. The parts add to DOR's maximum allowable levy to the dollar (Dispatch arithmetic). For 2026 the board took the 1% ($27,086.77 for the current-expense levy); the levy resolution passed unanimously.</figcaption>
+    </figure>
+
+    <div class="fair" id="fair-to-say">
+      <h3>What's also fair to say</h3>
+      <ul>
+        <li>Skamania isn't poor on every measure. In 2022 it collected $1,210 per resident in its own revenue, about 1.46 times the national county median and seventh of 39 Washington counties. A small county carries fixed costs (a jail, a courthouse, a sheriff) over few people, so that number reads high.</li>
+        <li>The board chose not to take its 1% for 2025. It banked the $26,605, which it can still claim in a later year.</li>
+        <li>Some costs are local choices, such as the new finance software. In October 2026 the county reported its payroll module would not be ready before April 2027. <span class="chip tape">Meeting recording</span></li>
+        <li>Skamania counts as metro in federal statistics because it's in the Portland-Vancouver area. Programs keyed to "rural" may not see it that way.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 3. THE BONE ============ -->
+  <section id="the-bone">
+    <p class="eyebrow">3 · What the bone looks like</p>
+    <h2>From the county's own meetings, October and November 2026</h2>
+    <p class="lede col">These come from the county's posted meeting recordings and typed records. Where the record doesn't name who spoke, neither do we.</p>
+
+    <div class="bite">
+      <q>Four deputies for 24 hours. And two on, two off. So they're pulling 12-hour days and two of them for a 1,600-square-mile county.</q>
+      <p class="who">The Sheriff's Office, Oct. 27, 2026, describing a bad stretch. The office said it had gone from 17 positions to 15 about two years earlier. <span class="chip tape">Meeting recording</span></p>
+    </div>
+
+    <div class="bites-grid">
+      <div class="bite">
+        <p class="plain">Cut the vacant 15th deputy position, and the county loses $181,058 a year in patrol contracts.</p>
+        <p class="who">The Sheriff's Office's warning on Oct. 27, 2026. That position staffs the Forest Service and PacifiCorp patrol contracts; PacifiCorp's covers Swift Reservoir. The contract amounts come from the Sheriff's Office's own 2025 funding application. <span class="chip tape">Meeting recording</span></p>
+      </div>
+      <div class="bite">
+        <p class="plain">In 2025 the Sheriff's Office said it couldn't afford drug take-back days or prevention talks at Wind River Middle School and Stevenson High.</p>
+        <p class="who">Sheriff Summer Scheyer's application to the county's Opioid Abatement Council, Sept. 23, 2025. The council and the board approved $5,000 for that work in 2026.</p>
+      </div>
+      <div class="bite">
+        <q>Commissioners pay their own cell phone bills … and I'm still $14,000 short, so we're dipping into employees.</q>
+        <p class="who">Laying out, at the Oct. 5, 2026 budget workshop, what an 8% cut to the commissioners' own office would take. It was an example, not a decision. <span class="chip tape">Meeting recording</span></p>
+      </div>
+      <div class="bite">
+        <q>We've got $1,500 for office supplies. That's what you get. And we use what's in the cupboard.</q>
+        <p class="who">Said during the board's line-by-line pass through the commissioners' own office budget, Oct. 27, 2026. Staff also offered to drop a $500 postage line. <span class="chip tape">Meeting recording</span></p>
+      </div>
+      <div class="bite">
+        <p class="plain">Fuel, small tools, repairs, registrations, tuition. Line by line.</p>
+        <p class="who">What the Sheriff's Office offered to trim from its patrol, jail and work-crew budgets on Nov. 3, 2026, on top of halving overtime. At an Oct. 6 workshop, Public Works listed a custodian's job, about $81,000, as a possible cut; the board left it in at that workshop. <span class="chip tape">Meeting recording</span></p>
+      </div>
+      <div class="bite">
+        <p class="plain">285 people served. County support down from about $20,000 to $5,000.</p>
+        <p class="who">The Skamania County Council on Domestic Violence and Sexual Assault, presenting its request for $10,000 on Nov. 3, 2026. It also counted 2,562 shelter bed nights for women and children, and helps with rent, food and diapers. <span class="chip tape">Meeting recording</span></p>
+      </div>
+      <div class="bite">
+        <q>Community members reach out … to see if we have volunteer opportunities to help them meet that 80 hour in a month volunteer requirement.</q>
+        <p class="who">Julie Hester, Washington Gorge Action Programs, Nov. 3, 2026, on residents volunteering at the Stevenson food bank to keep their federal benefits. On Oct. 20, state data cited to the board put the number of Skamania residents under the federal food-benefit work rule between 197 and almost 300. <span class="chip tape">Meeting recording</span></p>
+      </div>
+      <div class="bite">
+        <q>I'm not going to authorize hiring somebody and then turn around and … potentially lay them off.</q>
+        <p class="who">A commissioner, Oct. 13, 2026, announcing a hold on hiring. There was no motion; staff held hiring requests pending the board's direction. <span class="chip tape">Meeting recording</span></p>
+      </div>
+      <div class="bite">
+        <q>At this time, we just don't have the resources to deliver meals.</q>
+        <p class="who">The North Bonneville senior center's board president, asked on Nov. 3, 2026 whether the center delivers meals. Meals served were up 11% in 2026, and food costs were up about $300 a month. <span class="chip tape">Meeting recording</span></p>
+      </div>
+      <div class="bite">
+        <p class="plain">Up to $12,990 for a shower-card system, door locks and cameras at the fairgrounds, so homeless residents can shower free.</p>
+        <p class="who">Approved Nov. 3, 2026 from the homeless housing fund. On Oct. 27 a commissioner relayed a Washington Gorge Action Programs worker's account that most people the worker had given showers to were getting ready for job interviews. <span class="chip tape">Meeting recording</span></p>
+      </div>
+    </div>
+
+    <div class="bite">
+      <q>Seeing no public in the chamber.</q>
+      <p class="who">Opening the hearing on the 2027 preliminary budget at 5 p.m. on Nov. 3, 2026. Nobody came, and no written testimony arrived. The board adopted the preliminary budget unanimously with the $545,000 gap in it; a preliminary budget doesn't have to balance. <span class="chip tape">Meeting recording</span></p>
+    </div>
+  </section>
+
+  <!-- ============ 4. LEVERS ============ -->
+  <section id="levers">
+    <p class="eyebrow">4 · What the state controls</p>
+    <h2>Six levers in Olympia's hands</h2>
+    <p class="lede col">Most of what squeezes Skamania's general fund is set in state law, the state budget or a state court rule. Each of these has a real tradeoff; we've tried to state both sides.</p>
+
+    <div class="levers">
+      <article class="lever" id="lever-levy">
+        <h3>The 1% levy limit</h3>
+        <dl>
+          <dt>What it is</dt><dd>RCW 84.55 caps how much a county's regular property-tax revenue can grow each year: 1% over the highest of the last three levies, plus add-ons for new construction, improvements and state-assessed property. For a county of 10,000 people or more, the 1% drops to the inflation rate in a low-inflation year unless two of three commissioners find "substantial need," which restores up to 1% for that year. Going higher takes a voter-approved lid lift.</dd>
+          <dt>What Skamania sees</dt><dd>The 1% was worth $27,086.77 to the general fund for 2026; the levy resolution passed unanimously. No county lid lift is on record.</dd>
+          <dt>What's been tried</dt><dd>HB 1334 and SB 5798 (2025) would have tied the limit to inflation plus population. Neither passed. ESHB 2442 (2026) kept the 1% but allows lid lifts of up to 10 years (in effect since July 1, 2026), lets counties split off the veterans and mental-health levies, adds a small public-health-clinic levy, and lets rental-car tax pay for public defenders. Its property-tax sections apply to taxes collected in 2027, including the levy set Dec. 15, 2026, so 2027 levy figures won't line up with earlier years.</dd>
+          <dt>The tradeoff</dt><dd>A looser cap lets revenue keep pace with costs, and it raises property-tax bills for people already stretched. A tight cap keeps bills predictable, and it pushes counties toward cuts, fees, levy elections and dependence on transfers.</dd>
+        </dl>
+        <p class="cite"><a href="https://app.leg.wa.gov/RCW/default.aspx?cite=84.55.005">RCW 84.55.005</a> · <a href="https://app.leg.wa.gov/RCW/default.aspx?cite=84.55.0101">RCW 84.55.0101</a> · <a href="https://app.leg.wa.gov/billsummary?BillNumber=2442&amp;Year=2026">ESHB 2442</a> · <a href="https://app.leg.wa.gov/billsummary?BillNumber=1334&amp;Year=2025">HB 1334</a> · <a href="https://app.leg.wa.gov/billsummary?BillNumber=5798&amp;Year=2025">SB 5798</a></p>
+      </article>
+
+      <article class="lever" id="lever-defense">
+        <h3>Public defense</h3>
+        <dl>
+          <dt>What it is</dt><dd>Counties pay for lawyers for people who can't afford one. In 2025 the state Supreme Court cut the felony caseload limit from 150 cases per lawyer a year to 47 weighted case credits, effective Jan. 1, 2026, with up to ten years to phase in. The state's grant helps; the rest is the county's.</dd>
+          <dt>What Skamania sees</dt><dd>On Nov. 10, 2026 the board approved advertising for a Superior Court defender for 2027 because one attorney can't return. Staff warned on Oct. 27 that the public-defense line "could probably go up." <span class="chip tape">Meeting recording</span></dd>
+        </dl>
+        <div class="chart" id="chart-opd" data-h="150" style="margin-top:12px"></div>
+        <dl>
+          <dt>What's been tried</dt><dd>HB 1592 and SB 5404 (2025), as introduced, would have had the state pay half of trial-level costs and let counties under 50 people per square mile ask the state Office of Public Defense to take over the work; Skamania has about 7. Neither passed. SB 5914 (a phased state share) was introduced; ESSB 5912 (a task force) passed the Senate 48–0 and stalled.</dd>
+          <dt>The tradeoff</dt><dd>A state share eases the county's bill and costs the state general fund. Leaving it local keeps control local, and leaves small counties competing for scarce lawyers.</dd>
+        </dl>
+        <p class="cite">Chart: state Office of Public Defense grants to Skamania, 2021–2026. · <a href="https://opd.wa.gov/node/514">OPD grant table</a> · <a href="https://opd.wa.gov/node/485">caseload standards</a> · <a href="https://app.leg.wa.gov/billsummary?BillNumber=1592&amp;Year=2025">HB 1592</a></p>
+      </article>
+
+      <article class="lever" id="lever-dnr">
+        <h3>State forest land and DNR's share</h3>
+        <dl>
+          <dt>What it is</dt><dd>DNR manages forest land the county gave the state, sells the timber and keeps a management share before paying the county. RCW 79.64.110 caps that share at 25%, with written authority for DNR's board to go to 27% that each biennial budget bill renews. The current authority runs through June 30, 2027, so extending it is a 2027-session decision. Separately, the capital budget pays Skamania for state forest land locked up under endangered-species rules.</dd>
+          <dt>What Skamania sees</dt><dd>DNR's board scheduled the 25% to 27% increase for its Nov. 3, 2026 meeting. A commissioner put the cost at $63,000 to $69,000 a year on a ten-year average. Commissioners describe the locked-up-land payment as about $1.8 million a biennium and worry it will move from the capital to the operating budget. <span class="chip tape">Meeting recording</span></dd>
+          <dt>From the record</dt><dd>"$60,000 for us is considerable considering that we're probably going to lose our veteran services officer." A commissioner, Oct. 20, 2026. No decision on that position is on record. <span class="chip tape">Meeting recording</span></dd>
+          <dt>The tradeoff</dt><dd>Funding DNR's management account from the state general fund spares timber counties and competes with everything else. Raising the fee moves DNR's shortfall onto rural counties and their junior districts.</dd>
+        </dl>
+        <p class="cite"><a href="https://app.leg.wa.gov/RCW/default.aspx?cite=79.64.110">RCW 79.64.110</a> · <a href="https://www.dnr.wa.gov/node/35569">State Forest Land Replacement</a></p>
+      </article>
+
+      <article class="lever" id="lever-srs">
+        <h3>Forest money and school funding</h3>
+        <dl>
+          <dt>What it is</dt><dd>Congress sets Secure Rural Schools. The state decides what happens next: under RCW 28A.520.020, federal forest money a school district receives is offset against its state basic-education funding, except that districts with 57% or more low-income students keep the first $70,000. The 2023–25 budget suspended the offset.</dd>
+          <dt>What Skamania sees</dt><dd>A payment that arrived after the June 30, 2025 window cost Stevenson-Carson School District roughly $250,000 to $300,000, by the account given to commissioners. Rep. Waters said on June 23, 2026 that he had a bill drafted to fix it. The state schools office has said the Legislature would need to restore the budget language or amend the statute. <span class="chip tape">Meeting recording</span></dd>
+          <dt>The tradeoff</dt><dd>Holding forest districts harmless costs the state school budget and gives those districts more per student than others. Not doing it means a federal payment meant for rural schools partly replaces state money instead of adding to it.</dd>
+        </dl>
+        <p class="cite"><a href="https://app.leg.wa.gov/RCW/default.aspx?cite=28A.520.020">RCW 28A.520.020</a></p>
+      </article>
+
+      <article class="lever" id="lever-health">
+        <h3>Foundational public health</h3>
+        <dl>
+          <dt>What it is</dt><dd>The state funds a core set of local public-health services through Foundational Public Health Services money (RCW 43.70.515).</dd>
+          <dt>What Skamania sees</dt><dd>The county received $1,076,000 against $1,369,000 expected, about $293,000 less, and held a position open while waiting on state decisions. Klickitat's health department reported losing about $380,000. <span class="chip tape">Meeting recording</span></dd>
+          <dt>The tradeoff</dt><dd>Restoring the money competes in a tight state budget. Not restoring it shifts core work like disease investigation onto county general funds whose main tax grows about 1% a year plus new construction.</dd>
+        </dl>
+        <p class="cite"><a href="https://app.leg.wa.gov/RCW/default.aspx?cite=43.70.515">RCW 43.70.515</a></p>
+      </article>
+
+      <article class="lever" id="lever-mandates">
+        <h3>Mandates with deadlines</h3>
+        <dl>
+          <dt>What it is</dt><dd>The Growth Management Act's periodic review names Skamania County and its cities for Dec. 31, 2026 (RCW 36.70A.130). Because Skamania doesn't fully plan under the act, its review covers critical areas and resource lands, and small, slow-growing counties and cities may take up to 24 more months. RCW 43.135.060 says the state must pay for new mandates; its text doesn't reach court rules, funding cuts or agency fees.</dd>
+          <dt>What Skamania sees</dt><dd>The county's critical-areas ordinance was on the Nov. 10, 2026 agenda for adoption, after state fish and ecology agencies objected to its stream buffers. Stevenson asked about a one-year extension. North Bonneville and Bingen have their own deadlines in the same cycle. <span class="chip tape">Meeting recording</span></dd>
+          <dt>The tradeoff</dt><dd>Uniform state standards protect shared resources. Small jurisdictions carry the same paperwork as large ones with a fraction of the staff.</dd>
+        </dl>
+        <p class="cite"><a href="https://app.leg.wa.gov/RCW/default.aspx?cite=36.70A.130">RCW 36.70A.130</a> · <a href="https://app.leg.wa.gov/RCW/default.aspx?cite=43.135.060">RCW 43.135.060</a></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ 5. ASKS ============ -->
+  <section id="asks">
+    <p class="eyebrow">5 · What's waiting for someone to carry it</p>
+    <h2>Asks already in motion</h2>
+    <p class="lede col">These are things local bodies in the district have already asked of the state. Several ran through the outgoing delegation. Sen. Paul Harris stays in office and is in the record on several of them. Klickitat County is split between the 14th and 17th districts, so its countywide asks reach both delegations; the White Salmon–Bingen end, where the bridge lands, is in the 17th.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>The ask</th><th>Where it stands</th><th>Who's carrying it locally</th></tr></thead>
+        <tbody>
+          <tr><td>Fix the school forest-money offset</td><td>Rep. Waters said on June 23, 2026 that he had a bill drafted, "as long as … I come back." It needs a new sponsor for 2027. <span class="chip tape">Meeting recording</span></td><td>Stevenson-Carson School District; Skamania commissioners</td></tr>
+          <tr><td>Stevenson's Commerce grant, about $147,000</td><td>The city's memo describes a potential legislative reauthorization in the 2027 session to move the money from the Courthouse Plaza to Walnut Park design, a route it says Waters' office confirmed. The council leaned toward Walnut Park on Oct. 15, 2026, without a vote. The grant expires in July 2027. <span class="chip tape">Meeting recording</span></td><td>City of Stevenson</td></tr>
+          <tr><td>Payment for locked-up state forest land</td><td>Commissioners describe about $1.8 million a biennium through the capital budget and fear a move to the operating budget. <span class="chip tape">Meeting recording</span></td><td>Skamania commissioners; the county's state lobbyist</td></tr>
+          <tr><td>DNR management share, 25% to 27%</td><td>DNR's board scheduled the increase for Nov. 3, 2026. The authority to go above 25% expires June 30, 2027 unless the Legislature renews it.</td><td>Skamania commissioners</td></tr>
+          <tr><td>Secure Rural Schools beyond 2026</td><td>Federal law runs through fiscal 2026. On Nov. 3, 2026 the commissioners voted 3–0 to have their chair sign a letter to Congress backing reauthorization.</td><td>Skamania commissioners; school districts</td></tr>
+          <tr><td>Hood River–White Salmon bridge, $30 million for 2027–29</td><td>The 2025–27 transportation budget says the Legislature intends $30 million in 2027–29 only if federal construction funding and an Oregon match are secured. The bridge authority plans an Olympia update day in late March or early April 2027.</td><td>Hood River–White Salmon Bridge Authority</td></tr>
+          <tr><td>White Salmon pool, $1 million capital ask</td><td>Asked for $1 million in 2026; $500,000 was awarded and applied to the parking area. All construction bids were rejected in July 2026, and no re-bid date is on record.</td><td>White Salmon Valley Pool District</td></tr>
+          <tr><td>Green-energy sales tax back to counties</td><td>The Washington State Association of Counties accepted Klickitat's proposal. As of Sept. 15, 2026 the county was looking for a sponsor. <span class="chip tape">Meeting recording</span></td><td>Klickitat County commissioners</td></tr>
+          <tr><td>North Bonneville lift stations</td><td>Public Works Board grant application for Lift Stations 2 and 4; the city reported it submitted on Aug. 11, 2026.</td><td>City of North Bonneville</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 6. DATES & PEOPLE ============ -->
+  <section id="dates">
+    <p class="eyebrow">6 · Where to be, and who knows the file</p>
+    <h2>Dates on the record</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>When</th><th>What</th></tr></thead>
+        <tbody>
+          <tr><td class="when">Dec. 1, 2026, 1:30 p.m.</td><td>Klickitat County 2027 preliminary budget and capital improvement plan hearings.</td></tr>
+          <tr><td class="when">Dec. 3–5, 2026</td><td>Washington Association of Conservation Districts annual conference in Stevenson.</td></tr>
+          <tr><td class="when">Dec. 15, 2026, 5 p.m.</td><td>Skamania County final 2027 budget and property-tax levies, Courthouse Room 18, Stevenson, in person or by Zoom. Written comments must reach the Clerk of the Board by noon on the Monday before (Dec. 14).</td></tr>
+          <tr><td class="when">Dec. 31, 2026</td><td>Growth Management Act periodic review date named for Skamania County and its cities; small, slow-growing jurisdictions may take up to 24 more months.</td></tr>
+          <tr><td class="when">Jan. 11, 2027</td><td>The 105-day 2027 session opens.</td></tr>
+          <tr><td class="when">Feb. 2027</td><td>Conservation districts' Legislative Day in Olympia. <span class="chip tape">Meeting recording</span></td></tr>
+          <tr><td class="when">Mar. 4, 2027</td><td>Klickitat County's battery-storage moratorium and interim zoning expire.</td></tr>
+          <tr><td class="when">Late Mar. or early Apr. 2027</td><td>Hood River–White Salmon Bridge Authority's Olympia update day.</td></tr>
+          <tr><td class="when">June 30, 2027</td><td>DNR's authority to keep more than 25% of state forest timber revenue expires unless renewed.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-top:48px">People who already know the file</h3>
+    <div class="people">
+      <div class="person"><b>Sen. Paul Harris</b><span>17th District senator, staying in office. Credited with Rep. Waters for the $1.03 million Underwood water tank appropriation; Bingen's mayor met with him on the rail quiet zone.</span></div>
+      <div class="person"><b>Kevin Waters</b><span>Executive director of the Skamania County Economic Development Council; his House term ends in January 2027. He said he'd drafted the school forest-money fix, and his office advised Stevenson on its grant.</span></div>
+      <div class="person"><b>Brian Nichols, Asa Leckie, Rob Farris</b><span>Skamania County commissioners; Nichols chaired the board in 2026. Leckie is the county's member on the state Energy Facility Site Evaluation Council for the Cascade Renewable Transmission review.</span></div>
+      <div class="person"><b>Katie Whittier</b><span>CFM, Skamania County's state lobbyist. The board meets with her through the year.</span></div>
+      <div class="person"><b>Ron Ihrig, Todd Andrews, Lori Zoller</b><span>Klickitat County commissioners; Ihrig chaired the board in 2026. Their lobbyist is Zak Kennedy of Potts &amp; Associates.</span></div>
+      <div class="person"><b>Julie Hester</b><span>Executive director, Washington Gorge Action Programs: food banks, shelter, rental assistance, and what federal food-benefit changes are doing on the ground.</span></div>
+    </div>
+  </section>
+
+  <div class="method" id="method">
+    <p><b>About the sources.</b> Items marked <span class="chip tape">Meeting recording</span> rest on the county's own posted audio, transcribed by machine; speakers aren't labeled and figures are as spoken. Everything unmarked comes from a typed public record (packets, resolutions, minutes, notices, state agency tables) or from the statute or bill linked beside it. <span class="chip model">Projection</span> marks a model with its assumptions stated.</p>
+    <p>Everything here comes from public records in the Open Gorge Public Meetings Archive, which holds the agendas, packets, minutes and recordings of 46 public bodies in Skamania and Klickitat counties and the Gorge. We can pull the full record on any item above. Prepared by the Skamania Dispatch, <a href="https://skamaniadispatch.com">skamaniadispatch.com</a>.</p>
+    <p class="screen-only">Online, with working links: <a href="https://kate-rose.github.io/skamania-at-the-bone/">kate-rose.github.io/skamania-at-the-bone</a> · <a href="https://kate-rose.github.io/skamania-at-the-bone/Skamania-at-the-Bone_LD17-briefing.pdf">Download the PDF</a></p>
+  </div>
+</div>
+
+<script>
+(function(){
+  const NS="http://www.w3.org/2000/svg";
+  const fmt$=v=>"$"+Math.round(v).toLocaleString("en-US");
+  const fmtM=v=>"$"+(v/1e6).toFixed(v>=1e7?1:2).replace(/\.?0+$/,"")+"M";
+  const fmtK=v=>v>=1e6?fmtM(v):"$"+Math.round(v/1000)+"K";
+  function el(tag,attrs,parent,text){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e}
+  function svgFor(node){node.innerHTML="";const w=Math.max(280,node.clientWidth||600),h=+node.dataset.h||260;const s=el("svg",{viewBox:`0 0 ${w} ${h}`,role:"img"},node);return {s,w,h}}
+  function tip(e,t){el("title",{},e,t)}
+
+  // ---- data (sources in each figure's caption) ----
+  const cash=[[2016,1218329.30],[2017,1880599.16],[2018,1801719.24],[2019,3355074.25],[2020,2446773.94],[2021,1616138.97],[2022,2913486.66],[2023,3480872.98],[2024,3280090.71],[2025,2750508.17]];
+  const floor2026=2067072.79;
+  const scissors=[[2025,2708677,2708677,2708677],[2026,2803481,2774412,2735764],[2027,2901603,2838232,2763121],[2028,3003159,2900288,2790753],[2029,3108269,2960720,2818660],[2030,3217059,3019658,2846847],[2031,3329656,3077226,2875315],[2032,3446194,3133541,2904068],[2033,3566810,3188710,2933109],[2034,3691649,3242835,2962440],[2035,3820856,3296012,2992065]];
+  const srs=[[2001,9759546],[2002,9725040],[2003,9841740],[2004,9920219],[2005,10064048],[2006,10164689],[2007,null],[2008,9097113],[2009,null],[2010,7295862],[2011,4047145],[2012,3911822],[2013,3490668],[2014,3246180],[2015,3477890],[2016,null],[2017,3182630],[2018,2776960],[2019,2640745],[2020,2542602],[2021,3109050],[2022,2593667],[2023,2399155],[2024,2352481],[2025,2467843]];
+  const growth=[["2023",24993,51373,12396,true,88763],["2024",25881,41254,5311,true,72446],["2025",26606,41622,6501,false,48123]];
+  const onetime=[["Federal relief set aside for county insurance premiums",2500000],["Federal forest back payment (Secure Rural Schools)",875740.51],["Federal relief for building maintenance and access",807654.60],["Federal relief for finance software",700000]];
+  const gap=[["Gap at the Oct. 5 workshop",1046000,"bar"],["Gap on Oct. 20, still shown at the Nov. 3 adoption",545000,"lead"],["Sheriff's Office cuts offered Nov. 3",200751,"bar2"]];
+  const opd=[[2021,18716],[2022,17746],[2023,17087],[2024,18404],[2025,17447],[2026,35045]];
+  const land=[["Federal forest and Gorge purchases",79,"79.4%","bar2"],["State and other exempt land",9,"8.9%","bar"],["Taxable, in a reduced-value program",10,"9.9%","track"],["Taxable at full market value",2,"1.8%","lead"]];
+
+  function vbars(node,data,o){
+    const {s,w,h}=svgFor(node);const m={t:22,r:8,b:26,l:o.yl||52};const iw=w-m.l-m.r,ih=h-m.t-m.b;
+    const max=o.max;const n=data.length;const bw=iw/n;const y=v=>m.t+ih-(v/max)*ih;
+    (o.ticks||[]).forEach(t=>{el("line",{x1:m.l,x2:w-m.r,y1:y(t),y2:y(t),class:"grid"},s);el("text",{x:m.l-6,y:y(t)+4,"text-anchor":"end",class:"ax"},s,o.tf(t))});
+    const every=Math.ceil(n/(iw/38));
+    data.forEach((d,i)=>{const x=m.l+i*bw;const lbl=String(d[0]);
+      if(i%every===0||i===n-1)el("text",{x:x+bw/2,y:h-6,"text-anchor":"middle",class:"ax"},s,lbl);
+      if(d[1]==null){el("text",{x:x+bw/2,y:m.t+ih-4,"text-anchor":"middle",class:"ax"},s,"·");return}
+      const hl=o.hl&&o.hl(d,i);const r=el("rect",{x:x+bw*.14,y:y(d[1]),width:bw*.72,height:m.t+ih-y(d[1]),rx:2,fill:hl?"var(--lead)":"var(--bar)"},s);tip(r,lbl+": "+fmt$(d[1]));
+      if(o.lab&&o.lab(d,i))el("text",{x:x+bw/2,y:y(d[1])-6,"text-anchor":"middle",class:hl?"lab-lead":"lab"},s,o.lab(d,i));
+    });
+    return {s,w,h,m,y};
+  }
+
+  function drawCash(){const n=document.getElementById("chart-cash");const r=vbars(n,cash,{max:4e6,ticks:[0,1e6,2e6,3e6,4e6],tf:v=>v?"$"+v/1e6+"M":"$0",hl:d=>d[0]===2025,lab:d=>(d[0]===2023||d[0]===2025)?fmtM(d[1]):""});
+    const yy=r.y(floor2026);const bw=(r.w-r.m.l-r.m.r)/cash.length;el("line",{x1:r.m.l+bw*(cash.length-2),x2:r.w-r.m.r,y1:yy,y2:yy,stroke:"var(--ink)","stroke-width":2,"stroke-dasharray":"6 4"},r.s);}
+
+  function hbars(node,data,o){
+    const {s,w,h}=svgFor(node);const narrow=w<560;const lw=narrow?0:Math.min(300,w*.42);const rowH=(h-8)/data.length;const max=o.max;const vw=w-lw-90;
+    data.forEach((d,i)=>{const y0=4+i*rowH;
+      const ly=narrow?y0+14:y0+rowH/2+5;
+      const t=el("text",{x:0,y:ly,class:"lab"},s,d[0]);if(!narrow){t.setAttribute("x",lw-10);t.setAttribute("text-anchor","end")}
+      const by=narrow?y0+20:y0+rowH*.2;const bh=narrow?rowH-28:rowH*.6;const bx=narrow?0:lw;const bwid=Math.max(2,(d[1]/max)*(narrow?w-90:vw));
+      el("rect",{x:bx,y:by,width:narrow?w-90:vw,height:bh,rx:2,fill:"var(--track)",opacity:.5},s);
+      const r=el("rect",{x:bx,y:by,width:bwid,height:bh,rx:2,fill:`var(--${d[2]||"bar"})`,class:"grow"},s);tip(r,d[0]+": "+fmt$(d[1]));
+      el("text",{x:bx+bwid+8,y:by+bh/2+5,class:d[2]==="lead"?"lab-lead":"lab"},s,o.vf?o.vf(d[1]):fmt$(d[1]));
+    });
+  }
+
+  function drawScissors(){const n=document.getElementById("chart-scissors");const {s,w,h}=svgFor(n);const m={t:20,r:w<520?70:120,b:28,l:56};const iw=w-m.l-m.r,ih=h-m.t-m.b;
+    const min=2.6e6,max=3.9e6;const x=i=>m.l+(i/10)*iw;const y=v=>m.t+ih-((v-min)/(max-min))*ih;
+    [2.6e6,3.0e6,3.4e6,3.8e6].forEach(t=>{el("line",{x1:m.l,x2:m.l+iw,y1:y(t),y2:y(t),class:"grid"},s);el("text",{x:m.l-6,y:y(t)+4,"text-anchor":"end",class:"ax"},s,"$"+(t/1e6).toFixed(1)+"M")});
+    scissors.forEach((d,i)=>{if(i%(w<520?5:2)===0||i===10)el("text",{x:x(i),y:h-6,"text-anchor":"middle",class:"ax"},s,d[0])});
+    const area=el("path",{d:"M"+scissors.map((d,i)=>x(i)+","+y(d[1])).join("L")+"L"+scissors.slice().reverse().map((d,j)=>x(10-j)+","+y(d[2])).join("L")+"Z",fill:"var(--lead)",opacity:.12},s);
+    [[1,"var(--ink)",3],[2,"var(--bar)",3],[3,"var(--lead)",2.5]].forEach(([k,c,sw])=>{const p=el("path",{d:"M"+scissors.map((d,i)=>x(i)+","+y(d[k])).join("L"),fill:"none",stroke:c,"stroke-width":sw},s);
+      scissors.forEach((d,i)=>{const dot=el("circle",{cx:x(i),cy:y(d[k]),r:6,fill:"transparent"},s);tip(dot,d[0]+": "+fmt$(d[k]))})});
+    const L=scissors[10];el("text",{x:x(10)+8,y:y(L[1])+5,class:"lab"},s,fmtM(L[1]));el("text",{x:x(10)+8,y:y(L[2])+5,class:"lab"},s,fmtM(L[2]));el("text",{x:x(10)+8,y:y(L[3])+5,class:"lab-lead"},s,fmtM(L[3]));
+    const mid=(y(L[1])+y(L[2]))/2;if(w>=520)el("text",{x:x(10)+8,y:mid+5,class:"lab-lead"},s,"−$525K");
+  }
+
+  function drawGrowth(){const n=document.getElementById("chart-growth");const {s,w,h}=svgFor(n);const lw=46;const rowH=(h-30)/3;const max=95000;const vw=w-lw-90;const sc=v=>(v/max)*vw;
+    [0,25000,50000,75000].forEach(t=>{el("line",{x1:lw+sc(t),x2:lw+sc(t),y1:0,y2:h-24,class:"grid"},s);el("text",{x:lw+sc(t),y:h-6,"text-anchor":"middle",class:"ax"},s,"$"+t/1000+"K")});
+    growth.forEach((d,i)=>{const y0=i*rowH+rowH*.2,bh=rowH*.6;el("text",{x:lw-8,y:y0+bh/2+5,"text-anchor":"end",class:"lab"},s,d[0]);let x=lw;
+      const parts=[[d[4]?d[1]:0,"lead","1% increase"],[d[2],"bar","New construction and improvements"],[d[3],"bar2","State-assessed utility value"]];
+      parts.forEach(([v,c,nm])=>{if(!v)return;const r=el("rect",{x,y:y0,width:sc(v),height:bh,fill:`var(--${c})`},s);tip(r,d[0]+" "+nm+": "+fmt$(v));x+=sc(v)});
+      if(!d[4]){const r=el("rect",{x:x+1,y:y0+1,width:sc(d[1])-2,height:bh-2,fill:"none",stroke:"var(--lead)","stroke-width":2,"stroke-dasharray":"5 4"},s);tip(r,"2025 1% available, not taken: "+fmt$(d[1]));x+=sc(d[1])}
+      const tot=d[5];el("text",{x:x+8,y:y0+bh/2+5,class:"lab"},s,"+"+fmt$(tot));});
+  }
+
+  function drawLand(){const n=document.getElementById("chart-land");n.innerHTML="";const w=Math.max(260,n.clientWidth||400);const cols=10;const gapPx=3;const cell=Math.min(24,(w-gapPx*(cols-1))/cols);const H=cell*10+gapPx*9;
+    const s=el("svg",{viewBox:`0 0 ${cols*cell+gapPx*(cols-1)} ${H}`,role:"img",style:`max-width:${cols*(cell+gapPx)}px`},n);
+    let k=0;const cells=[];land.forEach(d=>{for(let i=0;i<d[1];i++)cells.push(d)});
+    cells.forEach((d,i)=>{const r=Math.floor(i/cols),c=i%cols;const rect=el("rect",{x:c*(cell+gapPx),y:r*(cell+gapPx),width:cell,height:cell,rx:2,fill:`var(--${d[3]})`},s);tip(rect,d[0]+": "+d[2])});
+    const lg=document.getElementById("land-legend");lg.innerHTML="";land.forEach(d=>{const sp=document.createElement("span");const sw=document.createElement("i");sw.className="sw";sw.style.background=`var(--${d[3]})`;sp.appendChild(sw);sp.appendChild(document.createTextNode(d[0]+" "+d[2]));lg.appendChild(sp)});
+  }
+
+  function drawSRS(){vbars(document.getElementById("chart-srs"),srs,{max:1.1e7,yl:44,ticks:[0,5e6,1e7],tf:v=>v?"$"+v/1e6+"M":"$0",hl:d=>d[0]===2006||d[0]===2025,lab:d=>(d[0]===2006||d[0]===2025)?fmtM(d[1]):""})}
+  function drawOPD(){vbars(document.getElementById("chart-opd"),opd,{max:40000,yl:40,ticks:[0,20000,40000],tf:v=>"$"+v/1000+"K",hl:d=>d[0]===2026,lab:d=>(d[0]===2021||d[0]===2026)?fmtK(d[1]):""})}
+
+  function all(){try{drawCash();hbars(document.getElementById("chart-gap"),gap,{max:1100000});drawScissors();drawLand();drawSRS();drawGrowth();hbars(document.getElementById("chart-onetime"),onetime.map(d=>[d[0],d[1],d[1]===2500000?"lead":"bar"]),{max:2700000,vf:v=>v>=1e6?fmtM(v):fmt$(v)});drawOPD()}catch(e){console.error(e)}}
+  all();let t;window.addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(all,150)});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(all);
+})();
+</script>
+</body>
+</html>
