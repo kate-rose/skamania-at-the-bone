@@ -52,8 +52,9 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--lead);outline-offse
 
 /* hero */
 .hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:24px 56px;padding-block:40px 32px;align-items:end}
+.hero>div{container-type:inline-size}
 .hero .for{font-size:20px;color:var(--muted);margin-top:16px;max-width:30ch}
-.stat{font-family:var(--display);font-weight:700;font-size:clamp(96px,17vw,200px);line-height:.85;color:var(--lead);font-variant-numeric:tabular-nums}
+.stat{font-family:var(--display);font-weight:700;font-size:clamp(64px,17vw,200px);font-size:min(200px,26cqi);line-height:.85;color:var(--lead);font-variant-numeric:tabular-nums}
 .stat-cap{font-size:20px;margin-top:12px;max-width:38ch}
 @media (max-width:760px){.hero{grid-template-columns:minmax(0,1fr)}}
 
